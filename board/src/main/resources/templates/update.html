@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>update</title>
+</head>
+<body>
+<!--굳이 수정하지 않는 정보라 하더라도 hidden 속성으로라도 작성해야한다.-->
+<form action="/board/update" method="post" name="updateForm">
+    <input type="hidden" name="id" th:value="${boardUpdate.id}">
+    writer : <input type="text" name="boardWriter" th:value="${boardUpdate.boardWriter}" readonly><br>
+    pass : <input type="text" name="boardPass" id="boardPass"><br>  <!--사용자가 다시 입력한 비밀번호와 해당 게시글의 비밀번호가 일치한지 확인하기 위해 value 속성이 없음-->
+    title : <input type="text" name="boardTitle" th:value="${boardUpdate.boardTitle}"><br>
+    contents : <textarea name="boardContents" cols="30" rows="10" th:text="${boardUpdate.boardContents}"/>
+    <input type="hidden" name="boardHits" th:value="${boardUpdate.boardHits}">
+    <input type="button" value="글수정" onclick="boardUpdate()">
+</form>
+
+</body>
+<script th:inline="javascript">
+    const boardUpdate = () => {
+        const pass = [[${boardUpdate.boardPass}]];
+        const inputPass = document.getElementById("boardPass").value;
+        if (pass == inputPass) {
+            document.updateForm.submit();  //여기서 updateForm은 <form>요소의 name 속성의 값이다 즉 해당 폼을 전송하겠다는 의미
+        } else {
+            alert("비밀번호가 일치하지 않습니다");
+        }
+    }
+</script>
+</html>
