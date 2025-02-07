@@ -18,6 +18,15 @@ public class BoardDTO {
     private LocalDateTime boardCreatedTime;
     private LocalDateTime boardUpdatedTime;
 
+    //페이징때 사용하는 선택적 필드 생성자
+    public BoardDTO(Long id, String boardWriter, String boardTitle, int boardHits, LocalDateTime boardCreatedTime) {
+        this.id = id;
+        this.boardWriter = boardWriter;
+        this.boardTitle = boardTitle;
+        this.boardHits = boardHits;
+        this.boardCreatedTime = boardCreatedTime;
+    }
+
     public static BoardDTO toBoardDTO(BoardEntity boardEntity) {
         BoardDTO boardDTO = new BoardDTO();
         boardDTO.setId(boardEntity.getId());
